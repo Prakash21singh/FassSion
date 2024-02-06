@@ -1,0 +1,42 @@
+@media (max-width: 820px) {
+  .heading h1 {
+    font-size: 50px;
+  }
+  .itemOverlay .name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 5px;
+  }
+  .itemOverlay {
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+}
+@media (max-width: 640px) {
+  .shoppingElements {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .heading h1 {
+    font-size: 35px;
+  }
+
+  .shoppingElements {
+    width: 95vw;
+    margin-top: 150px;
+  }
+  .container {
+    width: 90%;
+    height: 12vh;
+    flex-direction: row;
+    position: fixed;
+    top: 4rem;
+    left: 50%;
+    justify-content: space-around;
+    transform: translate(-50%, -50%);
+  }
+}
+@media (max-width: 460px) {
+  .shoppingElements {
+    grid-template-columns: 1fr;
+  }
+}

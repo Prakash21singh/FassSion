@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet" />
+    <title>Order details</title>
+    <link rel="stylesheet" href="/stylesheets/orderDetails.css" />
+    <link
+      rel="stylesheet"
+      href="/stylesheets/responsive/responsiveOrderDetails.css" />
+    <script defer src="/javascripts/order.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navigation">
+        <div class="icon">
+          <a href="/"><i class="fa-solid fa-house"></i></a>
+        </div>
+        <div class="icon">
+          <a href="/shopping"><i class="fa-solid fa-shirt"></i></a>
+        </div>
+        <div class="icon active">
+          <a href="#"><i class="fa-solid fa-box-archive"></i></a>
+        </div>
+        <div class="icon">
+          <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+        <div class="icon">
+          <a href="/track"><i class="fa-solid fa-truck-fast"></i></a>
+        </div>
+      </div>
+      <div class="left">
+        <form method="post" action="/shopping/<%=data._id %>">
+          <div class="row">
+            <div class="column">
+              <label for="pincode">Pincode</label>
+              <input
+                type="text"
+                placeholder="Pincode"
+                name="pincode"
+                required
+                id="pincode" />
+            </div>
+            <div class="column">
+              <label for="state">State</label>
+              <input
+                type="text"
+                placeholder="State"
+                required
+                name="state"
+                id="state" />
+            </div>
+          </div>
+          <div class="phone">
+            <label for="phone">Phone num</label>
+            <input
+              type="number"
+              required
+              placeholder="Phone Number"
+              name="phone"
+              id="phone" />
+          </div>
+          <div class="address">
+            <label for="address">Address</label>
+            <textarea
+              name="address"
+              id="address"
+              required
+              placeholder="Your Address"></textarea>
+          </div>
+          <div class="submit">
+            <button>Place Order</button>
+          </div>
+        </form>
+      </div>
+      <div class="right">
+        <div class="right-top">
+          <img src="<%=data.img %>" alt="productImg" />
+          <div class="logo">
+            <h2>Fass<span class="orange">Sion</span> Products</h2>
+          </div>
+        </div>
+        <div class="right-bottom">
+          <div class="accounting">
+            <div class="line">
+              <h4>Product:</h4>
+              <p><%=data.product %></p>
+            </div>
+            <div class="line">
+              <h4>Category <i class="fa fa-tag" aria-hidden="true"></i>:</h4>
+              <p><%=data.category %></p>
+            </div>
+            <div class="dashed">
+              <div class="line">
+                <h4>Amount:</h4>
+                <p>$<span class="famount"><%=data.fPrice %></span></p>
+              </div>
+              <div class="line">
+                <h4>Delivery charges:</h4>
+                <p>
+                  <sub>Delivery Charges</sub>$<span class="delivery">5.00</span>
+                </p>
+              </div>
+              <div class="line">
+                <h4>GST:</h4>
+                <p>
+                  <sub>18% GST</sub>
+                  $<span class="gst">18 </span>
+                </p>
+              </div>
+            </div>
+            <div class="total">
+              <h3>Total:</h3>
+              <p>$ <span class="totalPrice">1000</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

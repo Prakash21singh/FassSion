@@ -1,0 +1,234 @@
+@media (max-width: 840px) {
+  .centerProduct,
+  .centerProduct2,
+  .centerProduct3 {
+    scale: 0.7;
+    opacity: 0.5;
+    /* transform: translateY(100px); */
+  }
+  .centerProduct {
+    top: 45%;
+    left: 35%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    display: none;
+  }
+  .centerProduct2 {
+    top: 45%;
+    left: 55%;
+    transform: translate(-50%, -50%) rotate(10deg);
+    display: none;
+  }
+  .centerProduct3 {
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    display: none;
+  }
+  .center {
+    display: none;
+  }
+  .nav {
+    justify-content: space-around;
+  }
+  .top {
+    width: 95%;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    z-index: 50;
+  }
+  .bottom {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .item {
+    justify-content: center;
+    align-items: center;
+  }
+  .searchItem {
+    display: none;
+  }
+  .right_content {
+    width: max-content;
+  }
+  .products {
+    grid-template-columns: 1fr 1fr;
+  }
+  .showcase1,
+  .showcase2 {
+    scale: 0.7;
+  }
+  .bottom_faculty {
+    width: 100%;
+  }
+  .facultyContentToDisplay1 {
+    width: 100%;
+    height: 400px;
+  }
+  .facultyContentToDisplay1 img {
+    width: 100%;
+    height: 100%;
+  }
+  .description h1 {
+    font-size: 3rem;
+  }
+  .cardShow {
+    flex-wrap: wrap;
+  }
+  .card {
+    width: 48%;
+    height: 270px;
+  }
+  .cardtwo {
+    order: 3;
+  }
+  .userReviewsSection {
+    width: 100%;
+  }
+  .reviews {
+    width: 98%;
+  }
+}
+
+@media (max-width: 620px) {
+  .card {
+    width: 80%;
+    margin: 20px;
+  }
+
+  .cardShow {
+    height: 100%;
+  }
+  .clothesShopping {
+    width: 100%;
+  }
+  .showcase1,
+  .showcase2 {
+    display: none;
+  }
+  .brandImage i {
+    font-size: 100px;
+  }
+  .product_item {
+    min-width: 180px;
+  }
+  .bottom {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .clothingItems {
+    display: none;
+  }
+  .right_content {
+    width: 30%;
+  }
+  .left_content {
+    width: 63%;
+  }
+  .left_content p {
+    width: 100%;
+  }
+  .top {
+    width: 90%;
+  }
+  .bottom_faculty {
+    grid-template-columns: 1fr;
+  }
+  .facultyContentToDisplay1 {
+    width: 100%;
+  }
+  .option {
+    margin: 5px;
+  }
+  .top_faculty {
+    width: 100%;
+    font-size: 12px;
+  }
+  .userReviewsSection {
+    grid-template-columns: 1fr;
+  }
+  .reviews {
+    width: 95%;
+  }
+  .userPanel {
+    width: 95%;
+  }
+  .rightSide {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .showcase {
+    width: 100%;
+  }
+  .showcase h2 {
+    font-size: 18px;
+  }
+  .brandImage i {
+    font-size: 70px;
+  }
+  .introClothe h2 {
+    font-size: 18px;
+  }
+  .introClothe button {
+    font-size: 10px;
+  }
+  .left {
+    font-size: 18px;
+  }
+  .nav {
+    justify-content: space-between;
+  }
+  .right {
+    width: 60%;
+  }
+  .top {
+    width: 100%;
+  }
+  .left_content {
+    padding-left: 20px;
+    flex: 1;
+  }
+  .left_content p {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .right_content {
+    position: absolute;
+    right: 0;
+    width: max-content;
+  }
+  .bottom {
+    width: 90%;
+  }
+  .item {
+    margin: 2px;
+  }
+  .section1_overlay {
+    width: 100%;
+  }
+  .nav {
+    justify-content: center;
+  }
+  .left {
+    width: 50%;
+  }
+  .product_item img {
+    height: 200px;
+  }
+  .product_item {
+    height: 330px;
+  }
+  .social {
+    display: flex;
+  }
+  .userPanel {
+    width: 100%;
+    font-size: 14px;
+  }
+  .leftSide {
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+  }
+}

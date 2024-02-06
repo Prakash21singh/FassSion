@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=EB+Garamond&family=Poppins:wght@100;400&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="stylesheets/user/registration.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="loginPage">
+        <div class="overlay">
+          <div class="box">box</div>
+        </div>
+        <h1>Fass<span class="orange">Sion</span> user registraion</h1>
+        <form method="post" action="/register">
+          <div class="row">
+            <div class="row_column">
+              <label for="Firstname">Firstname</label>
+              <input
+                type="text"
+                name="firstname"
+                id="Firstname"
+                placeholder="Firstname" />
+            </div>
+            <div class="row_column">
+              <label for="Lastname">Lastname</label>
+              <input
+                type="text"
+                name="lastname"
+                id="Lastname"
+                placeholder="Lastname" />
+            </div>
+          </div>
+          <div class="row1">
+            <div class="column">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email@gmail.com" />
+            </div>
+            <div class="column">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                id="password" />
+            </div>
+            <button class="submit">Register Now</button>
+          </div>
+          <p>Already have an account <a href="/login">LogIn Now</a></p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
