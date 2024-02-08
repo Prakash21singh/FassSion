@@ -100,3 +100,8 @@ form {
   width: 70%;
   padding: 14px;
 }
+
+.message {
+  color: red;
+  font-size: 12px;
+}

@@ -115,3 +115,7 @@ form {
   width: 98%;
   padding: 10px;
 }
+.message {
+  font-size: 12px;
+  color: red;
+}

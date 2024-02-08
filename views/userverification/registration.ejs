@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=EB+Garamond&family=Poppins:wght@100;400&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="stylesheets/user/registration.css" />
+    <script defer src="../../javascripts/userCheck/registration.js"></script>
   </head>
   <body>
     <div class="container">
@@ -18,7 +19,7 @@
           <div class="box">box</div>
         </div>
         <h1>Fass<span class="orange">Sion</span> user registraion</h1>
-        <form method="post" action="/register">
+        <form id="form" method="post" action="/register">
           <div class="row">
             <div class="row_column">
               <label for="Firstname">Firstname</label>
@@ -53,6 +54,7 @@
                 placeholder="Password"
                 name="password"
                 id="password" />
+              <div class="message"></div>
             </div>
             <button class="submit">Register Now</button>
           </div>

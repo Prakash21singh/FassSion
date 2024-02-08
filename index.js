@@ -14,6 +14,7 @@ const Publish = require("./models/mypublish.js");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
+app.use(express.json());
 app.use(
   session({
     saveUninitialized: false,
@@ -38,29 +39,7 @@ main()
   .catch((err) => {
     console.log(err);
   });
-
-app.get("/login", async (req, res) => {
-  res.render("userverification/login.ejs");
-});
-app.get("/register", (req, res) => {
-  res.render("userverification/registration.ejs");
-});
-
-app.post("/login", async (req, res) => {
-  let { email, password } = req.body;
-  let data = await User.findOne({
-    $and: [{ email: email }, { password: password }],
-  });
-
-  if (data) {
-    req.session.isLogin = true;
-    req.session.user = data;
-    res.redirect("/");
-  } else {
-    return res.status(400).send("Data doesn't found");
-  }
-});
-
+//Login Middleware check function
 const isLoggedIn = function (req, res, next) {
   if (req.session.isLogin) {
     // if (true) {
@@ -70,17 +49,33 @@ const isLoggedIn = function (req, res, next) {
   }
 };
 
+app.get("/login", async (req, res) => {
+  res.render("userverification/login.ejs");
+});
+app.post("/login", async (req, res) => {
+  let { email, password } = req.body;
+  let data = await User.findOne({
+    $and: [{ email: email }, { password: password }],
+  });
+
+  if (data) {
+    req.session.isLogin = true;
+    req.session.user = data;
+    res.status(200).send({ message: "Login successful" });
+  } else {
+    res.status(401).send({ message: "Invalid credentials" });
+  }
+});
+
+app.get("/register", (req, res) => {
+  res.render("userverification/registration.ejs");
+});
+
 app.post("/register", async (req, res) => {
   let { firstname: fname, lastname: lname, email, password } = req.body;
-
   let existingData = await User.findOne({ email: email });
   if (existingData) {
-    setTimeout(() => {
-      res.redirect;
-    });
-    return res
-      .status(400)
-      .send("Email is already in use. Please choose a different email.");
+    res.status(401).send({ message: "Email is already in use Try to log in" });
   } else {
     const registered = await User.create({
       firstname: fname,
@@ -89,9 +84,7 @@ app.post("/register", async (req, res) => {
       password: password,
     });
     if (registered) {
-      setTimeout(() => {
-        res.redirect("/login");
-      }, 2000);
+      res.status(200).send({ message: "Registered successfully" });
     }
   }
 });

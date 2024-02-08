@@ -412,7 +412,7 @@ body {
   overflow: hidden;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.304);
   transition: 0.3s all;
-  height: 350px;
+  height: 370px;
 }
 .product_item:hover {
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.504);

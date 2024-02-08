@@ -18,7 +18,7 @@
           <div class="box"></div>
         </div>
         <h1>Fass<span class="orange">Sion</span> Login credentials</h1>
-        <form method="post" action="/login">
+        <form id="form" method="post" action="/login">
           <div class="row">
             <div class="column">
               <label for="email">Email:</label>
@@ -28,6 +28,7 @@
                 id="email"
                 placeholder="Email@gmail.com"
                 autocomplete="off" />
+              <div class="emailMsg"></div>
             </div>
             <div class="column">
               <label for="password">Password</label>
@@ -36,6 +37,8 @@
                 placeholder="Password"
                 name="password"
                 id="password" />
+              <div class="passwordMsg"></div>
+              <div class="message"></div>
             </div>
             <button class="submit">Log In</button>
           </div>
@@ -43,5 +46,6 @@
         </form>
       </div>
     </div>
+    <script src="../../javascripts/userCheck/login.js"></script>
   </body>
 </html>
