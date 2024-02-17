@@ -16,6 +16,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  myOrder: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Order",
+    },
+  ],
+  myCart: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Cart",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

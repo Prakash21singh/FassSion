@@ -36,10 +36,5 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userOrder: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
 });
 module.exports = mongoose.model("Order", orderSchema);

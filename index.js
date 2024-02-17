@@ -20,8 +20,12 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: "ancdefgh",
+    cookie: {
+      maxAge: 360000,
+    },
   })
 );
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 let PORT = process.env.PORT || 3030;
@@ -39,6 +43,7 @@ main()
   .catch((err) => {
     console.log(err);
   });
+
 //Login Middleware check function
 const isLoggedIn = function (req, res, next) {
   if (req.session.isLogin) {
@@ -49,9 +54,11 @@ const isLoggedIn = function (req, res, next) {
   }
 };
 
+//Login route for authentication
 app.get("/login", async (req, res) => {
   res.render("userverification/login.ejs");
 });
+//Login route
 app.post("/login", async (req, res) => {
   let { email, password } = req.body;
   let data = await User.findOne({
@@ -67,10 +74,10 @@ app.post("/login", async (req, res) => {
   }
 });
 
+//Register Route
 app.get("/register", (req, res) => {
   res.render("userverification/registration.ejs");
 });
-
 app.post("/register", async (req, res) => {
   let { firstname: fname, lastname: lname, email, password } = req.body;
   let existingData = await User.findOne({ email: email });
@@ -89,31 +96,36 @@ app.post("/register", async (req, res) => {
   }
 });
 
+//Home Route
 app.get("/", isLoggedIn, async (req, res) => {
   const data = await Product.find();
-
   res.render("home.ejs", { data });
 });
 
+//Shopping route
 app.get("/shopping", isLoggedIn, async (req, res) => {
   const data = await Product.find();
   res.render("shopping.ejs", { data });
 });
 
+//show shopping items
 app.get("/shopping/:id", isLoggedIn, async (req, res) => {
   let { id } = req.params;
   const [data] = await Product.find({ _id: id });
   res.render("checkout.ejs", { data });
 });
+
+//Proceed for order route
 app.get("/shopping/:id/order", isLoggedIn, async (req, res) => {
   let { id } = req.params;
   const data = await Product.findOne({ _id: id });
   res.render("orderDetails.ejs", { data });
 });
+
+//Order items
 app.post("/shopping/:id", isLoggedIn, async (req, res) => {
   let { pincode, state, phone, address } = req.body;
   let { id } = req.params;
-  let userOrdered = req.session.user._id;
   let {
     product: item,
     iPrice,
@@ -131,27 +143,35 @@ app.post("/shopping/:id", isLoggedIn, async (req, res) => {
     pincode: pincode,
     address: address,
     category: category,
-    userOrder: userOrdered,
     image: image,
   });
-
+  let { _id: userId } = req.session.user;
+  let user = await User.findOne({ _id: userId });
+  user.myOrder.push(data);
+  await user.save();
   res.redirect("/shopping");
 });
 
+//Track ordered items
 app.get("/track", isLoggedIn, async (req, res) => {
-  const data = await order.find({ userOrder: req.session.user._id });
+  const { myOrder: data } = await User.findOne({
+    _id: req.session.user._id,
+  }).populate("myOrder");
   if (data) {
     res.render("track.ejs", { data });
   } else {
-    res.send("<h1 style='text-align:center;'>No Order Yet</h1>");
+    res.status(200).json({ message: "No orders yet" });
   }
 });
+
+//Cart Items
 app.get("/cart", isLoggedIn, async (req, res) => {
   const data = await Cart.find({ user: req.session.user._id });
   res.render("cart.ejs", { data });
 });
 
-app.delete("/delete/:id", isLoggedIn, async (req, res) => {
+//Remove items from cart
+app.delete("/cart/:id/delete", isLoggedIn, async (req, res) => {
   let { id } = req.params;
   let data = await Cart.findOneAndDelete({
     $and: [{ productId: id }, { user: req.session.user._id }],
@@ -159,6 +179,7 @@ app.delete("/delete/:id", isLoggedIn, async (req, res) => {
   res.redirect("/cart");
 });
 
+//Add cart items
 app.post("/cart/:id", isLoggedIn, async (req, res) => {
   let { id } = req.params;
   let addedData = await Cart.findOne({
@@ -189,11 +210,13 @@ app.post("/cart/:id", isLoggedIn, async (req, res) => {
   }
 });
 
+//My Publish products
 app.get("/myProduct", isLoggedIn, async (req, res) => {
   const data = await Publish.find({ userId: req.session.user._id });
   res.render("myProduct.ejs", { data });
 });
 
+//Edit page for published product
 app.get("/myProduct/:id", isLoggedIn, async (req, res) => {
   let { id } = req.params;
   let data = await Publish.findOne({ _id: id });
@@ -201,6 +224,7 @@ app.get("/myProduct/:id", isLoggedIn, async (req, res) => {
   res.render("editMyProduct.ejs", { data });
 });
 
+//Edit published product
 app.patch("/myProduct/:id", isLoggedIn, async (req, res) => {
   let { id } = req.params;
   const {
@@ -240,6 +264,7 @@ app.patch("/myProduct/:id", isLoggedIn, async (req, res) => {
   res.redirect("/shopping");
 });
 
+//Delete myPublished product
 app.delete("/myProduct/:id", isLoggedIn, async (req, res) => {
   const { id } = req.params;
 
@@ -247,11 +272,12 @@ app.delete("/myProduct/:id", isLoggedIn, async (req, res) => {
   const data2 = await Product.findOneAndDelete({ publishedBy: id });
   res.redirect("/shopping");
 });
-
+//Get published product Form
 app.get("/publish", isLoggedIn, async (req, res) => {
   res.render("publish.ejs");
 });
 
+// Publish product submit
 app.post("/publish", isLoggedIn, async (req, res) => {
   const { productname: product, iPrice, fPrice, category, img } = req.body;
   const data1 = await Publish.create({
@@ -276,6 +302,7 @@ app.post("/publish", isLoggedIn, async (req, res) => {
   res.redirect("/shopping");
 });
 
+//Log out
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
